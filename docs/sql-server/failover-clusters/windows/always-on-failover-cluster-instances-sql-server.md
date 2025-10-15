@@ -124,6 +124,9 @@ For more information, see [Failover policy for failover cluster instances](failo
 
 To get started, review [Connect with strict encryption](../../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance).
 
+> [!NOTE]
+> [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] failover cluster instance installation [fails if TLS 1.2 is disabled on the machine](../../sql-server-2025-known-issues.md#sql-server-2025-installation-fails-when-tls-12-is-disabled). 
+
 ## Elements of a failover cluster instance
 
 An FCI consists of a set of physical servers (nodes) that contain similar hardware configuration and also identical software configuration that includes operating system version and patch level, and [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] version, patch level, components, and instance name. Identical software configuration is necessary to ensure that the FCI can be fully functional when it fails over between the nodes.

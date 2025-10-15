@@ -1,9 +1,10 @@
 ---
-title: Guidelines for Using xml Data Type Methods
+title: Guidelines for Using Xml Data Type Methods
 description: "Guidelines for Using xml Data Type Methods"
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: "03/04/2017"
+ms.reviewer: mathoma
+ms.date: 10/14/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -14,15 +15,15 @@ dev_langs:
   - "TSQL"
 ---
 
-# Guidelines for Using xml Data Type Methods
+# Guidelines for using xml data type methods
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
-This topic describes guidelines for using the **xml** data type methods.
+This article describes guidelines for using the **xml** data type methods.
 
-## The PRINT Statement
+## The PRINT statement
 
-The **xml** data type methods cannot be used in the PRINT statement as shown in the following example. The **xml** data type methods are treated as subqueries, and subqueries are not allowed in the PRINT statement. As a result, the following example returns an error:
+The **xml** data type methods can't be used in the `PRINT` statement as shown in the following example. The **xml** data type methods are treated as subqueries, and subqueries aren't allowed in the `PRINT` statement. As a result, the following example returns an error:
 
 ```sql
 DECLARE @x XML
@@ -40,11 +41,11 @@ SET @c = @x.value('/root[1]', 'VARCHAR(11)')
 PRINT @c
 ```
 
-## The GROUP BY Clause
+## The GROUP BY clause
 
-The **xml** data type methods are treated internally as subqueries. Because GROUP BY requires a scalar and does not allow aggregates and subqueries, you cannot specify the **xml** data type methods in the GROUP BY clause. A solution is to call a user-defined function that uses XML methods inside of it.
+The **xml** data type methods are treated internally as subqueries. Because `GROUP BY` requires a scalar and doesn't allow aggregates and subqueries, you can't specify the **xml** data type methods in the `GROUP BY` clause. A solution is to call a user-defined function that uses XML methods inside of it.
 
-## Reporting Errors
+## Reporting errors
 
 When reporting errors, **xml** data type methods raise a single error in the following format:
 
@@ -60,11 +61,14 @@ Msg 2396, Level 16, State 1:
 XQuery [xmldb_test.xmlcol.query()]: Attribute may not appear outside of an element
 ```
 
-## Singleton Checks
+> [!NOTE]  
+> Parsing errors raised by the XQuery parser (such as syntax errors in the XML referenced as part of the XML data type method, for example), abort the active transaction, regardless of the [XACT_ABORT](../statements/set-xact-abort-transact-sql.md) setting of the current session.
 
-Location steps, function parameters, and operators that require singletons will return an error if the compiler cannot determine whether a singleton is guaranteed at run time. This problem occurs frequently with untyped data. For example, the lookup of an attribute requires a singleton parent element. An ordinal that selects a single parent node is sufficient. The evaluation of a **node()**-**value()** combination to extract attribute values may not require the ordinal specification. This is shown in the next example.
+## Singleton checks
 
-### Example: Known Singleton
+Location steps, function parameters, and operators that require singletons will return an error if the compiler can't determine whether a singleton is guaranteed at run time. This problem occurs frequently with untyped data. For example, the lookup of an attribute requires a singleton parent element. An ordinal that selects a single parent node is sufficient. The evaluation of a **node()**-**value()** combination to extract attribute values might not require the ordinal specification. This is shown in the next example.
+
+### Example: Known singleton
 
 In this example, the **nodes()** method generates a separate row for each `<book>` element. The **value()** method that is evaluated on a `<book>` node extracts the value of `@genre` and, being an attribute, is a singleton.
 
@@ -75,11 +79,11 @@ FROM T CROSS APPLY xCol.nodes('//book') AS R(nref)
 
 XML schema is used for type checking of typed XML. If a node is specified as a singleton in the XML schema, the compiler uses that information and no error occurs. Otherwise, an ordinal that selects a single node is required. In particular, the use of descendant-or-self axis (//) axis, such as in `/book//title`, loses singleton cardinality inference for the `<title>` element, even if the XML schema specifies it to be so. Therefore, you should rewrite it as `(/book//title)[1]`.
 
-It is important to remain aware of the difference between `//first-name[1]` and `(//first-name)[1]` for type checking. The former returns a sequence of `<first-name>` nodes in which each node is the leftmost `<first-name>` node among its siblings. The latter returns the first singleton `<first-name>` node in document order in the XML instance.
+It's important to remain aware of the difference between `//first-name[1]` and `(//first-name)[1]` for type checking. The former returns a sequence of `<first-name>` nodes in which each node is the leftmost `<first-name>` node among its siblings. The latter returns the first singleton `<first-name>` node in document order in the XML instance.
 
 ### Example: Using value()
 
-The following query on an untyped XML column results in a static, compilation error.This is because **value()** expects a singleton node as the first argument and the compiler cannot determine whether only one `<last-name>` node will occur at run time:
+The following query on an untyped XML column results in a static, compilation error. This is because **value()** expects a singleton node as the first argument and the compiler can't determine whether only one `<last-name>` node will occur at run time:
 
 ```sql
 SELECT xCol.value('//author/last-name', 'NVARCHAR(50)') LastName
@@ -93,7 +97,7 @@ SELECT xCol.value('//author/last-name[1]', 'NVARCHAR(50)') LastName
 FROM T
 ```
 
-However, this solution does not solve the error, because multiple `<author>` nodes may occur in each XML instance. The following rewrite works:
+However, this solution doesn't solve the error, because multiple `<author>` nodes might occur in each XML instance. The following rewrite works:
 
 ```sql
 SELECT xCol.value('(//author/last-name/text())[1]', 'NVARCHAR(50)') LastName
@@ -102,6 +106,6 @@ FROM T
 
 This query returns the value of the first `<last-name>` element in each XML instance.
 
-## See Also
+## Related content
 
-- [xml Data Type Methods](../../t-sql/xml/xml-data-type-methods.md)
+- [xml Data Type Methods](xml-data-type-methods.md)

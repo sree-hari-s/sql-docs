@@ -22,6 +22,8 @@ There's typically a trade-off between optimizing for costs and optimizing for pe
 
 For comprehensive details, see the other articles in this series: [Checklist](performance-guidelines-best-practices-checklist.md), [Storage](performance-guidelines-best-practices-storage.md), [Security](security-considerations-best-practices.md), [HADR configuration](hadr-cluster-best-practices.md), [Collect baseline](performance-guidelines-best-practices-collect-baseline.md).
 
+[!INCLUDE [sql-vm-deployment-failure](../../includes/sql-vm-deployment-failure.md)]
+
 ## Checklist
 
 Review the following checklist for a brief overview of the VM size best practices that the rest of the article covers in greater detail:
@@ -45,14 +47,11 @@ SQL Server data warehouse and mission critical environments will often need to s
 
 Use the SQL Server VM marketplace images with the storage configuration in the portal. This makes it easier to properly create the storage pools necessary to get the size, IOPS, and throughput necessary for your workloads. It's important to choose SQL Server VMs that support premium storage performance. See the [storage](performance-guidelines-best-practices-storage.md) article to learn more.
 
-> [!CAUTION]
-> SQL Server isn't supported on VM sizes that deploy with an uninitialized ephemeral disk. To learn more, review [VM deployment and SQL Server failures](/troubleshoot/sql/azure-sql/sql-deployment-fails-drive-not-ready). 
-
 ## Supportability
 
 Consider the following limitations when installing SQL Server to Azure VMs: 
 
-- [Azure Virtual Machine Scale Sets (VMSS)](/azure/virtual-machine-scale-sets/overview) are not supported with SQL Server on Azure VMs. If you decide to use VMSS with your SQL Server on Azure VM against this recommendation, and enable the [Automatic guest patching feature](/azure/virtual-machines/automatic-vm-guest-patching), which replaces the OS disk when a new image version is released, you will likely disrupt SQL Server, leading to potential corruption, data loss, and availability issues. 
+- [Azure Virtual Machine Scale Sets](/azure/virtual-machine-scale-sets/overview) are not supported with SQL Server on Azure VMs. If you decide to use Virtual Machine Scale Sets with your SQL Server on Azure VM against this recommendation, and enable the [Automatic guest patching feature](/azure/virtual-machines/automatic-vm-guest-patching), which replaces the OS disk when a new image version is released, you will likely disrupt SQL Server, leading to potential corruption, data loss, and availability issues. 
 - SQL Server isn't supported on systems with more than 64 vCores per NUMA node. [Disable SMT](/sql/sql-server/compute-capacity-limits-by-edition-of-sql-server#disable-smt-in-an-azure-virtual-machine) to use SQL Server on Azure VMs that exceed 64 vCores per NUMA node.
 - SQL Server currently supports disks with a standard native [sector sizes of 512 bytes and 4 KB](/sql/sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2022#StorageTypes). Installing SQL Server to disks with 8-KB sector sizes isn't supported and can lead to [installation failures](/troubleshoot/sql/azure-sql/sql-installation-fails-sector-size-error-azure-vm), as well as [performance degradation from misaligned I/O](/troubleshoot/sql/database-engine/performance/performance-degradation-misaligned-io-sector-error). 
 - SQL Server on Azure VM images fail to deploy with VM sizes that have uninitialized ephemeral disks. To learn more, review [Some SQL Server on Azure VM images fail to deploy](/troubleshoot/sql/azure-sql/sql-deployment-fails-drive-not-ready).

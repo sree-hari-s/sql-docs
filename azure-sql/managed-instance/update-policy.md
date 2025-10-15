@@ -5,7 +5,7 @@ description: Use the update policy setting in Azure SQL Managed Instance to cont
 author: MladjoA
 ms.author: mlandzic
 ms.reviewer: mathoma
-ms.date: 09/15/2025
+ms.date: 10/15/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: how-to
@@ -122,15 +122,28 @@ To change the update policy for an existing instance in the Azure portal, follow
 
 ### [PowerShell](#tab/powershell)
 
-Set `DatabaseFormat` = `AlwaysUpToDate` when you update an existing SQL managed instance with the [Set-AzSqlInstance](/powershell/module/az.sql/set-azsqlinstance#example-9-update-an-existing-instance-with-database-format-and-pricing-model) PowerShell command to configure your instance to use the **Always-up-to-date** update policy. 
+Set `DatabaseFormat` when you update an existing SQL managed instance with the [Set-AzSqlInstance](/powershell/module/az.sql/set-azsqlinstance#example-9-update-an-existing-instance-with-database-format-and-pricing-model) PowerShell command to configure your instance to use the desired update policy. 
+
+To configure the update policy, set `DatabaseFormat` to one of the following values:
+- `SqlServer2025` to enable the **SQL Server 2025** update policy.
+- `AlwaysUpToDate` to enable the **Always-up-to-date** update policy.
 
 ### [Azure CLI](#tab/azure-cli)
 
-Set `--database-format` = `AlwaysUpToDate` when you update an existing SQL managed instance with the [az sql mi update](/cli/azure/sql/mi#az-sql-mi-update:~:text=Update%20mi%20database%20format%20and%20pricing%20model) Azure CLI command to configure your instance to use the **Always-up-to-date** update policy. 
+Set `--database-format` when you update an existing SQL managed instance with the [az sql mi update](/cli/azure/sql/mi#az-sql-mi-update:~:text=Update%20mi%20database%20format%20and%20pricing%20model) Azure CLI command to configure your instance to use the desired update policy.
+
+To configure the update policy, set `--database-format` to one of the following values:
+- `SqlServer2025` to enable the **SQL Server 2025** update policy.
+- `AlwaysUpToDate` to enable the **Always-up-to-date** update policy.
+
 
 ### [REST API](#tab/rest-api)
 
-Set `databaseFormat` = `AlwaysUpToDate` when you update an existing SQL managed instance with the [Managed Instances - Create Or Update](/rest/api/sql/managed-instances/create-or-update#create-managed-instance-with-all-properties) REST API command to configure your instance to use the **Always-up-to-date** update policy. 
+Set `databaseFormat` when you update an existing SQL managed instance with the [Managed Instances - Create Or Update](/rest/api/sql/managed-instances/create-or-update#create-managed-instance-with-all-properties) REST API command to configure your instance to use the desired update policy. 
+
+To configure the update policy, set `databaseFormat` to one of the following values:
+- `SqlServer2025` to enable the **SQL Server 2025** update policy.
+- `AlwaysUpToDate` to enable the **Always-up-to-date** update policy.
 
 ---
 
@@ -160,15 +173,27 @@ To create a new SQL managed instance with the **Always-up-to-date** policy in th
 
 ### [PowerShell](#tab/powershell)
 
-Set `DatabaseFormat` = `AlwaysUpToDate` when you create a new SQL managed instance with the [New-AzSqlInstance](/powershell/module/az.sql/new-azsqlinstance#example-10-create-a-new-instance-with-database-format-and-pricing-model) PowerShell command to create a new instance with the **Always-up-to-date** update policy. 
+Set `DatabaseFormat` = `AlwaysUpToDate` when you create a new SQL managed instance with the [New-AzSqlInstance](/powershell/module/az.sql/new-azsqlinstance#example-10-create-a-new-instance-with-database-format-and-pricing-model) PowerShell command to create a new instance with the desired update policy.
+
+To configure the update policy, set `DatabaseFormat` to one of the following values:
+- `SqlServer2025` to enable the **SQL Server 2025** update policy.
+- `AlwaysUpToDate` to enable the **Always-up-to-date** update policy.
 
 ### [Azure CLI](#tab/azure-cli)
 
-Set `--database-format` = `AlwaysUpToDate` when you create a new SQL managed instance with the [az sql mi create](/cli/azure/sql/mi#az-sql-mi-create:~:text=Create%20managed%20instance%20with%20database%20format%20and%20pricing%20model) Azure CLI command to create a new instance with the **Always-up-to-date** update policy. 
+Set `--database-format` = `AlwaysUpToDate` when you create a new SQL managed instance with the [az sql mi create](/cli/azure/sql/mi#az-sql-mi-create:~:text=Create%20managed%20instance%20with%20database%20format%20and%20pricing%20model) Azure CLI command to create a new instance with the desired update policy.
+
+To configure the update policy, set `--database-format` to one of the following values:
+- `SqlServer2025` to enable the **SQL Server 2025** update policy.
+- `AlwaysUpToDate` to enable the **Always-up-to-date** update policy.
 
 ### [REST API](#tab/rest-api)
 
-Set `databaseFormat` = `AlwaysUpToDate` when you create a new SQL managed instance with the [Managed Instances - Create Or Update](/rest/api/sql/managed-instances/create-or-update#create-managed-instance-with-all-properties) REST API command to create a new instance with the **Always-up-to-date** update policy. 
+Set `databaseFormat` when you create a new SQL managed instance with the [Managed Instances - Create Or Update](/rest/api/sql/managed-instances/create-or-update#create-managed-instance-with-all-properties) REST API command to create a new instance with the desired update policy. 
+
+To configure the update policy, set `DatabaseFormat` to one of the following values:
+- `SqlServer2025` to enable the **SQL Server 2025** update policy.
+- `AlwaysUpToDate` to enable the **Always-up-to-date** update policy.
 
 ---
 
@@ -185,7 +210,7 @@ select serverproperty('ProductUpdateType')
 ```
 
 The following values for `ProductUpdateType` indicate the update policy for the current instance: 
-- `CU`: Updates are deployed via cumulative updates (CUs) for the corresponding major SQL Server release (**SQL Server 2022** update policy)
+- `CU`: Updates are deployed via cumulative updates (CUs) for the corresponding major SQL Server release (**SQL Server 2022**, or **SQL Server 2025** update policy)
 - `Continuous`: New features are brought to Azure SQL Managed Instance as soon as they're available, independent of the SQL Server release cadence (**Always-up-to-date** update policy)
 
 ## Related content

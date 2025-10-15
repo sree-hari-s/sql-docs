@@ -16,6 +16,9 @@ ms.custom:
 
 To install a [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] failover cluster, you must create and configure a failover cluster instance by running [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Setup.
 
+> [!NOTE]
+> [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] failover cluster instance installation [fails if TLS 1.2 is disabled on the machine](../../sql-server-2025-known-issues.md#sql-server-2025-installation-fails-when-tls-12-is-disabled). 
+
 ## Install a failover cluster
 
  To install a failover cluster, you must use a domain account that has local administrator rights and permission to sign on as a service and act as part of the operating system on all nodes in the failover cluster.

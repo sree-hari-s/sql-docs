@@ -4,7 +4,7 @@ description: Create Azure SQL Managed Instance by using the Azure portal, PowerS
 author: vladai78
 ms.author: vladiv
 ms.reviewer: mathoma
-ms.date: 08/25/2025
+ms.date: 10/25/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: quickstart
@@ -127,6 +127,7 @@ The following table provides details for information on the **Additional setting
    | **Time zone** | Select the time zone that SQL managed instance observes.|For more information, see [Time zones in Azure SQL Managed Instance](timezones-overview.md).|
    | **Geo-Replication** | Select **No**. | Only enable this option if you plan to use the SQL managed instance as a failover group secondary.|
    | **Maintenance window** | Choose a suitable maintenance window. | Designate a schedule for when your instance is [maintained](../database/maintenance-window.md) by the service. | 
+   | **Update policy** | Select a suitable update policy. | The update policy determines how and when updates are applied to your SQL managed instance. For more information, see [Update policy](update-policy.md). The default option is **SQL Server 2022**, but you can choose the **SQL Server 2025** or **Always-up-to-date** update policy.|
 
 Select **Review + create** to review your choices before you create a SQL managed instance. Or, configure Azure Tags by selecting **Next: Tags** (recommended).
 

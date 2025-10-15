@@ -4,7 +4,7 @@ description: SDK-style SQL projects in Visual Studio enable the next generation 
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: randolphwest
-ms.date: 09/09/2025
+ms.date: 10/14/2025
 ms.service: sql
 ms.subservice: ssdt
 ms.topic: conceptual
@@ -33,13 +33,15 @@ For more information about SQL projects, see [What are SQL database projects?](.
 
 To install the SDK-style SQL projects in Visual Studio 2022, follow these steps:
 
-1. Download and install Visual Studio 2022 preview (17.12 preview 2 or later) from the [Visual Studio download page](https://visualstudio.microsoft.com/downloads/).
+1. Download and install Visual Studio 2022 (17.12 or later) from the [Visual Studio download page](https://visualstudio.microsoft.com/downloads/).
 
 1. During install, select the **Individual components** tab and search for "SQL" to locate and select "SQL Server Data Tools SDK-style (Preview)". Selecting this item automatically selects required dependencies.
 
-1. Continue the install without selecting workloads or extra features.
+1. Search for ".NET SDK" in the **Individual components** tab and select the ".NET SDK" component. Selecting this item automatically selects required dependencies, including supported .NET runtimes. The .NET SDK component enables support for additional versions of the Microsoft.Build.Sql SDK in Visual Studio, which are available through [NuGet.org](https://www.nuget.org/packages/Microsoft.build.sql#versions-body-tab).
 
 :::image type="content" source="media/sql-server-data-tools-sdk-style/installer-individual-component.png" alt-text="Screenshot of the Visual Studio installer with the individual components tab open." lightbox="media/sql-server-data-tools-sdk-style/installer-individual-component.png":::
+
+4. Continue the install without selecting workloads or extra features.
 
 The Visual Studio [documentation](/visualstudio/install/modify-visual-studio#change-workloads-or-individual-components) provides additional information on modifying Visual Studio installations to select individual components.
 

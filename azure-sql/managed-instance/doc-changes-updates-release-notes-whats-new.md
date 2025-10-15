@@ -71,10 +71,6 @@ The following table lists features of Azure SQL Managed Instance that have been 
 |[Native Windows principals](native-windows-principals.md) | February 2025 | Use the new **Windows** authentication metadata mode to allow Windows authentication or Microsoft Entra authentication (using a Windows principal metadata) with Azure SQL Managed Instance. |
 |[Instance pools](instance-pools-overview.md) | November 2024 | Save on costs and share resources between multiple instances in a pool within a single virtual machine. A convenient and cost-efficient way to migrate smaller SQL Server instances to the cloud, and the only way to deploy a 2-vCore managed instance. |
 |[Microsoft Entra nonunique name support](../database/authentication-microsoft-entra-create-users-with-nonunique-names.md) | November 2024 | The [CREATE USER](/sql/t-sql/statements/create-user-transact-sql) Transact-SQL (T-SQL) syntax has been extended to include `WITH OBJECT_ID` to [support creating Microsoft Entra logins and users in Azure SQL Managed Instance](../database/authentication-microsoft-entra-create-users-with-nonunique-names.md) that have nonunique names. |
-|[Fail over a link with T-SQL](managed-instance-link-failover-how-to.md?tabs=tsql#fail-over-a-database) | October 2024 | You can now fail over a [Managed Instance link](managed-instance-link-feature-overview.md) by using Transact-SQL (T-SQL) commands. |
-|[Link from SQL MI to SQL Server](managed-instance-link-feature-overview.md) | October 2024 | Configure a link *from* Azure SQL Managed Instance to SQL Server 2022. |
-|[Two-way DR with SQL Server 2022](managed-instance-link-disaster-recovery.md) | October 2024 | In the event of a disaster, you can fail your SQL Server 2022 workloads to Azure SQL Managed Instance using the link, and then, once the disaster is mitigated, you can fail back to SQL Server. |
-|[CURRENT_DATE Transact-SQL](/sql/t-sql/functions/current-date-transact-sql) | August 2024 |  A Transact-SQL (T-SQL) function that returns the current database system date as a date value, without the database time and time zone offset. |
 
 
 ## Documentation changes

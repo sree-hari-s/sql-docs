@@ -4,7 +4,7 @@ description: "Known issues, causes, and workarounds for SQL Server 2025 Preview 
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 09/24/2025
+ms.date: 10/14/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: troubleshooting-known-issue
@@ -19,6 +19,7 @@ This article describes known issues for [!INCLUDE [sssql25-md](../includes/sssql
 
 [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] has currently identified the following known issues:
 
+- [Installation fails when TLS 1.2 is disabled](#sql-server-2025-installation-fails-when-tls-12-is-disabled)
 - [Windows Arm64 not supported](#windows-arm64-not-supported)
 - [In-place upgrade fails due to Microsoft Visual C++ Redistributable](#in-place-upgrade-fails-due-to-microsoft-visual-c-redistributable)
 - [SQL Server on Windows fails to start on machines with more than 64 logical cores per NUMA node](#sql-server-on-windows-fails-to-start-on-machines-with-more-than-64-logical-cores-per-numa-node)
@@ -30,6 +31,16 @@ This article describes known issues for [!INCLUDE [sssql25-md](../includes/sssql
 - [PBKDF2 hashing algorithm can affect login performance](#pbkdf2-hashing-algorithm-can-affect-login-performance)
 - [Access violation exception can occur on readable secondary replicas under certain conditions](#access-violation-exception-can-occur-on-readable-secondary-replicas-under-certain-conditions)
 - [Vector index](#vector-index)
+
+## SQL Server 2025 installation fails when TLS 1.2 is disabled
+
+**Issue**: [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] installation fails if TLS 1.2 is disabled on the machine, including failover cluster instances.
+
+**Workaround**: Enable TLS 1.2 on the machine before attempting to install [!INCLUDE [sssql25-md](../includes/sssql25-md.md)].
+
+To enable TLS 1.2, set the `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols` registry entry for TLS 1.2 to `true`. 
+
+[Configure Windows to use TLS 1.2](../relational-databases/security/networking/connect-with-tls-1-3.md) provides a PowerShell script to enable TLS 1.2 programmatically.
 
 ## Windows Arm64 not supported
 
